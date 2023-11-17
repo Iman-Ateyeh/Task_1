@@ -1,3 +1,4 @@
+
 class customer_account:
     def __init__(self, username, balance=0): 
         #creating an initial instance of the bank account. 
@@ -73,11 +74,22 @@ def main():
             print("Invalid choice. Please enter a number between 1 and 3.")
 
         if current_account: # if current account is not none 
-            run_account_operations(current_account)
+            run_account_operations(current_account) 
+
+def get_positive_float_input(prompt):
+    while True:
+        try:
+            amount = float(input(prompt))
+            if amount > 0:
+                return amount
+            else:
+                print("Invalid input. Please enter a positive value.")
+        except ValueError:
+            print("Invalid input. Please enter a valid number.")
 
 def run_account_operations(account):
     actions = {
-        '1': account.check_balance,
+        '1': account.display_available_balance,
         '2': lambda: account.deposit(get_positive_float_input("Enter the amount to deposit: ")), # check if the amount is > 0 and display the needed statement. (build-in function)
         '3': lambda: account.withdraw(get_positive_float_input("Enter the amount to withdraw: ")),
         '4': account.display_transaction_history,
